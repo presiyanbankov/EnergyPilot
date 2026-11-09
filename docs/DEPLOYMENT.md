@@ -1,6 +1,6 @@
 # Railway deployment
 
-EnergyPilot runs as one Docker service with one replica. `railway.json` selects the Dockerfile, deployment health check and automatic sleeping. It requires a persistent volume at `/var/lib/energypilot` before deployment.
+EnergyPilot runs as one Docker service with one replica. Railway detects the root Dockerfile. Service settings select `/api/health` for deployment health checks (120-second timeout), one replica, automatic sleeping and an on-failure restart policy with 3 retries. A persistent volume is attached at `/var/lib/energypilot`. These settings are managed directly on Railway; the retired `railway.json` format is not used.
 
 Service settings:
 
