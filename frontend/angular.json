@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "projects": {
+    "energypilot": {
+      "projectType": "application",
+      "root": "",
+      "sourceRoot": "src",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "src/main.ts",
+            "index": "src/index.html",
+            "tsConfig": "tsconfig.json",
+            "styles": [
+              "src/styles.css"
+            ],
+            "outputPath": "dist/energypilot",
+            "outputHashing": "all"
+          }
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": {
+            "buildTarget": "energypilot:build"
+          }
+        }
+      }
+    }
+  }
+}

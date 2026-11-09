@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.sqlite3
+node_modules/
+.angular/
+frontend/dist/
+.env
+.test-runs/
+
+# Local implementation and mentoring notes
+/docs/IMPLEMENTATION.md
+
+# Local database sidecars, environment overrides and editor state
+*.sqlite3-*
+*.db
+*.db-*
+.env.*
+!.env.example
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
