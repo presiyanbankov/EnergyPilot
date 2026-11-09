@@ -19,3 +19,13 @@ Post-deployment checks: dashboard and sample download; two visitor sessions star
 Automatic sleeping can cause a cold start and sometimes a failed first request. Volume storage can still incur charges while compute sleeps. Do not add uptime pings that continually wake the service. Measure actual Railway usage; no fixed monthly cost is promised.
 
 References: https://docs.railway.com/volumes, https://docs.railway.com/config-as-code/reference, https://docs.railway.com/deployments/serverless.
+
+## Live deployment
+
+URL: https://energypilot-production.up.railway.app
+
+Deployed code: `c79540c`. GitHub CI passed. Public HTTP checks passed for the dashboard, health, sample download, CSV import, duplicate import, invalid rows, report cost scenario, visitor isolation and Secure/HttpOnly cookie flags. The test workspace retained 385 readings after a redeployment; a separate visitor retained its own 384 seeded readings. Sleeping was verified in the resolved deployment configuration, not by waiting for an idle sleep/wake cycle.
+
+GitHub `main` is connected for automatic deployment. Watch paths cover `backend/**`, `frontend/**`, `data/**`, `requirements.txt`, `Dockerfile` and `.dockerignore`, so documentation-only updates do not rebuild the service. Service-setting changes still need a deployment to affect the running container.
+
+Browser automation could not initialize; no automated visual or responsive-layout verification is claimed. A recorded walkthrough remains separate work.

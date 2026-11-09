@@ -2,6 +2,10 @@
 
 **Turning energy readings into explainable waste alerts.**
 
+[Open the live demo](https://energypilot-production.up.railway.app) · [CI checks](https://github.com/presiyanbankov/EnergyPilot/actions)
+
+The demo may take a moment to wake after inactivity. All energy readings are synthetic.
+
 A synthetic small office keeps consuming unusually high electricity overnight. The Angular dashboard shows the pattern, its supporting readings, suggested investigation and a cost scenario with editable assumptions. FastAPI performs validation and calculations; SQLite persists readings. There is no LLM, training, live meter connection or autonomous control.
 
 ## Run locally
@@ -91,7 +95,7 @@ Limitations: one application instance, no accounts, no cross-device recovery, no
 
 ## Demo
 
-See the [60-second walkthrough](docs/WALKTHROUGH.md) for a reproducible demo script. Public deployment and a recorded video are still outstanding.
+See the [60-second walkthrough](docs/WALKTHROUGH.md) for a reproducible demo script. The public demo is deployed; a recorded video is still outstanding.
 
 See [architectural decisions and interview prompts](docs/DECISIONS.md).
 
@@ -101,7 +105,8 @@ See [architectural decisions and interview prompts](docs/DECISIONS.md).
 - Local HTTP checks returned 200 for the dashboard, overview and downloadable report. Fixture: 384 readings, 12 flagged hours, 45.45 kWh observed excess.
 - 40 automated tests passed on Python 3.14, including visitor isolation, expiration and workspace limits. The dependency combination emits a Starlette warning that the httpx TestClient adapter is deprecated; tests currently work. The Python 3.12 CI/container configuration still needs a hosted run.
 - Browser automation could not initialise in this environment. Visual layout, actual browser interactions and responsive rendering have not been verified.
-- Public hosting and a recorded walkthrough are outstanding. The walkthrough document is a script, not a video. Docker configuration is provided but has not been built here.
+- Railway Docker deployment and hosted CI passed. HTTPS checks verified import, duplicate prevention, invalid-row rejection, report/sample downloads, Secure/HttpOnly cookies and visitor isolation. A test workspace survived redeployment on the persistent volume. Automatic sleeping is enabled.
+- The walkthrough document is a script, not a recorded video. Hosted browser interactions have not been visually verified by automation.
 
 ## Technical references
 
