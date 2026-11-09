@@ -138,6 +138,13 @@ def analyse(rows, min_history=7):
     return alerts
 
 
+@app.get("/api/health")
+def health():
+    with connect() as db:
+        db.execute("SELECT 1").fetchone()
+    return JSONResponse({"status": "ok"}, headers={"Cache-Control": "no-store"})
+
+
 @app.post("/api/import")
 async def import_csv(request: Request, file: UploadFile = File(...)):
     raw = await file.read(2_000_001)

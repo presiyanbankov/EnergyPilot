@@ -150,3 +150,16 @@ def test_startup_cleans_expired_workspace_without_a_data_request():
         with connect() as db:
             assert db.execute("SELECT COUNT(*) FROM workspaces").fetchone()[0] == 0
             assert db.execute("SELECT COUNT(*) FROM workspace_readings").fetchone()[0] == 0
+
+
+def test_healthcheck_does_not_create_workspaces_even_at_capacity(monkeypatch):
+    monkeypatch.setattr(workspaces, "MAX_WORKSPACES", 0)
+    with TestClient(app) as client:
+        for _ in range(3):
+            response = client.get("/api/health")
+            assert response.status_code == 200
+            assert response.json() == {"status": "ok"}
+            assert "set-cookie" not in response.headers
+        assert client.get("/api/overview").status_code == 503
+        with connect() as db:
+            assert db.execute("SELECT COUNT(*) FROM workspaces").fetchone()[0] == 0

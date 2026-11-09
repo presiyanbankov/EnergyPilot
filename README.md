@@ -70,6 +70,8 @@ Tests cover invalid dates/units/numbers, duplicate imports, conflicting readings
 
 ## Deploy
 
+See [Railway deployment settings](docs/DEPLOYMENT.md).
+
 Use the Dockerfile with a Python-capable host. Build: `docker build -t energypilot .`. Run: `docker run --rm -p 8000:8000 -v energypilot-data:/var/lib/energypilot energypilot`. The server honours `PORT`. Mount persistent storage at `/var/lib/energypilot`; without it, readings disappear on replacement. Use one application instance for this SQLite demo.
 
 This is an unauthenticated portfolio demo with separate anonymous visitor workspaces. Do not upload personal or production data. The cookie identifies a temporary workspace, not a logged-in user. Whoever possesses that cookie can access its workspace.
